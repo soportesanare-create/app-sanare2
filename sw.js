@@ -1,8 +1,11 @@
 /* Simple offline cache for static assets (GitHub Pages friendly). */
-const CACHE_NAME = "sanare-app-v1-5-r1";
+// Bump this value whenever you deploy changes, so browsers don't keep old HTML/JS.
+const CACHE_NAME = "sanare-app-v1-5-r3";
 const ASSETS = [
   "./",
   "./index.html",
+  "./medico.html",
+  "./kam.html",
   "./manifest.json",
   "./assets/css/styles.css",
   "./assets/js/app.js",
@@ -40,6 +43,21 @@ self.addEventListener("fetch", (event) => {
   // Don't cache cross-origin (e.g. embedded external iframes)
   if(new URL(req.url).origin !== self.location.origin) return;
 
+  // Network-first for HTML navigations (prevents stale pages after deployments)
+  const accept = req.headers.get("accept") || "";
+  const isHTML = req.mode === "navigate" || accept.includes("text/html");
+  if(isHTML){
+    event.respondWith(
+      fetch(req).then(res => {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(req, copy)).catch(()=>{});
+        return res;
+      }).catch(() => caches.match(req).then(cached => cached || caches.match("./index.html")))
+    );
+    return;
+  }
+
+  // Cache-first for static assets
   event.respondWith(
     caches.match(req).then(cached => cached || fetch(req).then(res => {
       const copy = res.clone();

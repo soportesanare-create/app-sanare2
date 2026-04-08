@@ -63,7 +63,7 @@
             <div class="hero-copy">
               <h1>Bienvenido(a) a SANARÉ</h1>
               <p>
-                Noticias clínicas y operación de centros de infusión, cotizaciones, Pulsera y Puntos.
+                Noticias clínicas y operación de centros de infusión, registro de pacientes, Pulsera y Puntos.
               </p>
             </div>
           </div>
@@ -110,19 +110,6 @@
         </div>
       </section>
 
-      <!-- COTIZADOR -->
-      <section class="screen" data-screen="quote">
-        <div class="card" style="padding:14px">
-          <div class="card-hd" style="padding:0 0 10px 0">
-            <div>
-              <h2>Cotizador</h2>
-              <div class="muted">Cotizaciones y comparativos</div>
-            </div>
-          </div>
-          <iframe class="embed" title="Cotizador SANARÉ" src="cotizador/index.html"></iframe>
-        </div>
-      </section>
-
       <!-- PULSERA (solo médico) -->
       <section class="screen" data-screen="wearable">
         <div class="card" style="padding:14px">
@@ -152,52 +139,90 @@
       <!-- PERFIL -->
       
       <section class="screen" data-screen="profile">
-        <div class="card" style="padding:14px">
+        <div class="card profile-pro" style="padding:14px">
           <div class="card-hd" style="padding:0 0 10px 0">
             <div>
               <h2>Perfil</h2>
-              <div class="muted">Cuenta y personalización</div>
+              <div class="muted">Sesión activa y personalización</div>
             </div>
           </div>
 
-          <div class="formrow">
-            <label class="lbl" for="inpEmail">Correo</label>
-            <input class="input" id="inpEmail" type="email" placeholder="correo@ejemplo.com" autocomplete="email" />
-
-            <label class="lbl" for="inpName">Nombre</label>
-            <input class="input" id="inpName" type="text" placeholder="Tu nombre (opcional)" autocomplete="name" />
-
-            <div class="divider"></div>
-
-            <div class="rowline">
-              <div>
-                <div class="rowtitle">Tonos</div>
-                <div class="small">Claro / Oscuro</div>
-              </div>
-              <button class="toggle" id="btnTheme" type="button" aria-label="Cambiar tonos">
-                <span id="themeLabel">Claro</span>
-                <i class="fa-solid fa-moon" aria-hidden="true"></i>
-              </button>
-            </div>
-
-            <div class="divider"></div>
-
+          <div class="profile-hero">
+            <div class="profile-avatar" id="profileAvatar">S</div>
             <div>
-              <div class="rowtitle">Color de acento</div>
-              <div class="small">Cambia el color de botones y resaltados.</div>
-              <div class="palette" id="accentPalette" role="listbox" aria-label="Colores de acento">
-                <button class="swatch" type="button" data-accent="#0b1e33" style="--sw:#0b1e33" aria-label="Azul SANARÉ"></button>
-                <button class="swatch" type="button" data-accent="#bb968c" style="--sw:#bb968c" aria-label="Rosa"></button>
-                <button class="swatch" type="button" data-accent="#653d2e" style="--sw:#653d2e" aria-label="Cacao"></button>
-                <button class="swatch" type="button" data-accent="#19a974" style="--sw:#19a974" aria-label="Verde"></button>
-                <button class="swatch" type="button" data-accent="#ffb020" style="--sw:#ffb020" aria-label="Ámbar"></button>
-                <button class="swatch" type="button" data-accent="#7c4dff" style="--sw:#7c4dff" aria-label="Morado"></button>
+              <div class="profile-greeting">Hola, <span id="profileDisplayName">Profesional SANARÉ</span></div>
+              <div class="small" id="profileEmailDisplay">Sesión iniciada correctamente</div>
+              <div class="profile-badge"><i class="fa-solid fa-circle-check"></i> Acceso activo</div>
+            </div>
+          </div>
+
+          <div class="task-grid">
+            <button class="task-card" type="button" data-quick-nav="home">
+              <div class="task-icon"><i class="fa-solid fa-user-plus"></i></div>
+              <div>
+                <strong>Registrar paciente</strong>
+                <div class="small">Da de alta y consulta el seguimiento.</div>
+              </div>
+            </button>
+
+            <button class="task-card" type="button" data-quick-nav="wearable">
+              <div class="task-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+              <div>
+                <strong>Ver pulsera</strong>
+                <div class="small">Monitoreo clínico y signos vitales.</div>
+              </div>
+            </button>
+
+            <button class="task-card" type="button" data-quick-nav="points">
+              <div class="task-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <strong>Mis metas</strong>
+                <div class="small">Revisa puntos, objetivos y avance.</div>
+              </div>
+            </button>
+          </div>
+
+          <div class="mini-list">
+            <div class="mini-item">
+              <div>
+                <div class="rowtitle">Tareas sugeridas</div>
+                <div class="small">Mantén visible lo importante al entrar.</div>
               </div>
             </div>
-
-            <button class="primary" id="btnSaveProfile">Guardar</button>
-            <div class="small">Se guarda en este dispositivo.</div>
+            <div class="mini-item"><span>1</span><div>Registrar nuevo paciente o actualizar seguimiento.</div></div>
+            <div class="mini-item"><span>2</span><div>Revisar pulsera y alertas clínicas del día.</div></div>
+            <div class="mini-item"><span>3</span><div>Consultar metas, puntos y pendientes operativos.</div></div>
           </div>
+
+          <div class="divider"></div>
+
+          <div class="rowline">
+            <div>
+              <div class="rowtitle">Tonos</div>
+              <div class="small">Claro / Oscuro</div>
+            </div>
+            <button class="toggle" id="btnTheme" type="button" aria-label="Cambiar tonos">
+              <span id="themeLabel">Claro</span>
+              <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div>
+            <div class="rowtitle">Color de acento</div>
+            <div class="small">Cambia el color de botones y resaltados.</div>
+            <div class="palette" id="accentPalette" role="listbox" aria-label="Colores de acento">
+              <button class="swatch" type="button" data-accent="#0b1e33" style="--sw:#0b1e33" aria-label="Azul SANARÉ"></button>
+              <button class="swatch" type="button" data-accent="#bb968c" style="--sw:#bb968c" aria-label="Rosa"></button>
+              <button class="swatch" type="button" data-accent="#653d2e" style="--sw:#653d2e" aria-label="Cacao"></button>
+              <button class="swatch" type="button" data-accent="#19a974" style="--sw:#19a974" aria-label="Verde"></button>
+              <button class="swatch" type="button" data-accent="#ffb020" style="--sw:#ffb020" aria-label="Ámbar"></button>
+              <button class="swatch" type="button" data-accent="#7c4dff" style="--sw:#7c4dff" aria-label="Morado"></button>
+            </div>
+          </div>
+
+          <div class="small" style="margin-top:12px">La sesión se identifica automáticamente con los datos de acceso guardados en el dispositivo.</div>
         </div>
       </section>
 </main>
@@ -208,10 +233,6 @@
         <button class="navbtn active" data-nav="home" aria-label="Inicio">
           <div class="i"><i class="fa-solid fa-house"></i></div>
           <span>Inicio</span>
-        </button>
-        <button class="navbtn" data-nav="quote" aria-label="Cotizar">
-          <div class="i"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-          <span>Cotizar</span>
         </button>
         <button class="navbtn" data-nav="wearable" aria-label="Pulsera" id="navWearable">
           <div class="i"><i class="fa-solid fa-heart-pulse"></i></div>

@@ -28,9 +28,9 @@ const newsGrid = $("#newsGrid");
 const newsCount = $("#newsCount");
 
 // Profile
-const inpName = $("#inpName");
-const inpEmail = $("#inpEmail");
-const btnSaveProfile = $("#btnSaveProfile");
+const profileDisplayName = $("#profileDisplayName");
+const profileEmailDisplay = $("#profileEmailDisplay");
+const profileAvatar = $("#profileAvatar");
 const btnTheme = $("#btnTheme");
 const themeLabel = $("#themeLabel");
 const accentPalette = $("#accentPalette");
@@ -75,7 +75,6 @@ function navigate(id){
 
   const titles = {
     home: "SANARÉ",
-    quote: "Cotizador",
     wearable: "Pulsera",
     points: (APP_ROLE === "medico" ? "Puntos" : "Comisiones"),
     profile: "Perfil"
@@ -129,16 +128,33 @@ function applyHomeKpis(){
 
 function initProfile(){
   const p = loadJSON(LS_PROFILE);
-  if(inpName) inpName.value = p.name || "";
-  if(inpEmail) inpEmail.value = p.email || "";
+  const nameCandidates = [
+    p.name,
+    p.displayName,
+    p.userName,
+    p.nombre,
+    p.fullName,
+    p.doctorName
+  ].filter(Boolean);
+  const emailCandidates = [
+    p.email,
+    p.userEmail,
+    p.correo,
+    p.loginEmail,
+    p.username
+  ].filter(Boolean);
 
-  btnSaveProfile?.addEventListener("click", () => {
-    const pp = loadJSON(LS_PROFILE);
-    pp.name = (inpName?.value || "").trim();
-    pp.email = (inpEmail?.value || "").trim();
-    saveJSON(LS_PROFILE, pp);
-    applyHomeKpis();
-    navigate("home");
+  const name = (nameCandidates[0] || '').trim();
+  const email = (emailCandidates[0] || '').trim();
+  const finalName = name || (email ? email.split('@')[0].replace(/[._-]+/g,' ') : 'Profesional SANARÉ');
+  const prettyName = finalName.replace(/\b\w/g, m => m.toUpperCase());
+
+  if(profileDisplayName) profileDisplayName.textContent = prettyName;
+  if(profileEmailDisplay) profileEmailDisplay.textContent = email || 'Sesión iniciada correctamente';
+  if(profileAvatar) profileAvatar.textContent = (prettyName || 'S').trim().charAt(0).toUpperCase();
+
+  $$('[data-quick-nav]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(btn.dataset.quickNav || 'home'));
   });
 }
 
@@ -358,7 +374,7 @@ function initNavCollapse(){
   if(pref === "1" || pref === "0"){
     setNavCollapsed(pref === "1", false);
   }else{
-    setNavCollapsed(window.matchMedia("(orientation: landscape)").matches, false);
+    setNavCollapsed(false, false);
   }
 
   btnNavToggle?.addEventListener("click", () => {
@@ -371,7 +387,7 @@ function initNavCollapse(){
     let pref2 = null;
     try{ pref2 = localStorage.getItem(LS_NAV); }catch(e){}
     if(pref2 !== "1" && pref2 !== "0"){
-      setNavCollapsed(window.matchMedia("(orientation: landscape)").matches, false);
+      setNavCollapsed(false, false);
     }else{
       syncNavSpace();
       resizeEmbeds();

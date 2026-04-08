@@ -476,3 +476,66 @@ body[data-theme="dark"] .swatch.active{outline: 3px solid rgba(246,247,251,.90)}
   /* In landscape default to collapsed nav to give more vertical room */
   body.auto-collapse-nav .bottomnav:not(.user-expanded){ }
 }
+
+
+/* Pro profile */
+.profile-pro{background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,244,242,.96));}
+.profile-hero{
+  display:flex; align-items:center; gap:14px;
+  padding:16px; margin: 6px 0 14px;
+  border-radius:20px;
+  border:1px solid rgba(101,61,46,.12);
+  background: linear-gradient(135deg, rgba(187,150,140,.14), rgba(255,255,255,.94));
+}
+.profile-avatar{
+  width:62px; height:62px; border-radius:20px;
+  display:grid; place-items:center;
+  font-weight:800; font-size:24px; color:#fff;
+  background: linear-gradient(135deg, var(--accent), rgba(101,61,46,.95));
+  box-shadow: 0 14px 34px rgba(11,30,51,.18);
+}
+.profile-greeting{font-size:20px; font-weight:800; line-height:1.15}
+.profile-badge{
+  display:inline-flex; align-items:center; gap:8px; margin-top:8px;
+  padding:8px 12px; border-radius:999px; font-size:12px; font-weight:700;
+  color: var(--navy);
+  background: rgba(255,255,255,.9); border:1px solid rgba(101,61,46,.14);
+}
+.task-grid{
+  display:grid; grid-template-columns:1fr; gap:12px; margin: 10px 0 14px;
+}
+@media (min-width: 760px){ .task-grid{grid-template-columns: repeat(3,1fr);} }
+.task-card{
+  width:100%; text-align:left; cursor:pointer;
+  display:flex; align-items:flex-start; gap:12px;
+  padding:16px; border-radius:18px;
+  border:1px solid rgba(101,61,46,.12);
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 12px 28px rgba(11,30,51,.06);
+}
+.task-card:hover{transform: translateY(-1px)}
+.task-card strong{display:block; font-size:14px; margin-bottom:4px}
+.task-icon{
+  width:44px; height:44px; flex:0 0 44px; border-radius:14px;
+  display:grid; place-items:center; color:#fff;
+  background: linear-gradient(135deg, var(--accent), rgba(101,61,46,.95));
+}
+.mini-list{display:grid; gap:10px; margin-top:4px}
+.mini-item{
+  display:flex; align-items:center; gap:12px;
+  padding:12px 14px; border-radius:16px;
+  border:1px solid rgba(101,61,46,.10);
+  background: rgba(255,255,255,.88);
+}
+.mini-item span{
+  width:28px; height:28px; border-radius:999px; flex:0 0 28px;
+  display:grid; place-items:center; font-weight:800; font-size:12px;
+  color:#fff; background: var(--accent);
+}
+body[data-theme="dark"] .profile-pro,
+body[data-theme="dark"] .profile-hero,
+body[data-theme="dark"] .task-card,
+body[data-theme="dark"] .mini-item,
+body[data-theme="dark"] .profile-badge{
+  background: rgba(255,255,255,.04);
+}
